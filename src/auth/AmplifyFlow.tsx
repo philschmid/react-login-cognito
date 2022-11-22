@@ -1,4 +1,6 @@
+import { FormField, Input } from '@cloudscape-design/components'
 import { Amplify, Auth } from 'aws-amplify'
+import React from 'react'
 
 // Form fields customization -> could be removed later
 export const formFields = {
@@ -14,26 +16,6 @@ export const formFields = {
       placeholder: 'Enter Your Email Here',
       isRequired: true,
       label: 'Email:',
-    },
-  },
-}
-
-// Components customization use Cloudscape theme
-export const components = {
-  SignUp: {
-    FormFields() {
-      return (
-        <>
-          <label>
-            Name:
-            <input type="text" name="username" />
-          </label>
-          <label>
-            Name:
-            <input type="password" name="password" />
-          </label>
-        </>
-      )
     },
   },
 }

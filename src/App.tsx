@@ -3,9 +3,13 @@ import './App.css'
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './routes/Home'
-import { Authenticator, } from '@aws-amplify/ui-react'
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
-import { formFields, services ,components } from './auth/AmplifyFlow'
+import { formFields, services, components } from './auth/AmplifyFlow'
+
+import '@cloudscape-design/global-styles/index.css'
+import SignUp from './auth/SignUp'
+import { Container } from '@cloudscape-design/components'
 
 Amplify.configure({
   Auth: {
@@ -17,38 +21,20 @@ Amplify.configure({
     userPoolId: import.meta.env.VITE_USER_POOL_ID,
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
     userPoolWebClientId: import.meta.env.VITE_USER_POOL_WEB_CLIENT_ID,
-    signUpVerificationMethod:  import.meta.env.VITE_SIGN_UP_VERIFICATION_METHOD
-
+    signUpVerificationMethod: import.meta.env.VITE_SIGN_UP_VERIFICATION_METHOD,
   },
 })
 
 function App() {
-   return (
-    <Authenticator services={services} components={components} formFields={formFields} initialState="signUp">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </Router>
-    </Authenticator>
-  )
+return    ( 
+  <Authenticator services={services} formFields={formFields} initialState="signUp">
+  <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </Router>
+</Authenticator>)
 }
 
-// const SomeComponent = (app) => {
-//   const params = new URLSearchParams(window.location.search) // id=123
-//   let param = params.get('aws-id') // 123
 
-//   const loginOptions = {}
-//   if (param) {
-//     loginOptions['aws-id'] = param
-//   }
-//   // const param = searchParams.get('test')
-//   return withAuthenticationRequired(app, {
-//     // Show a message while the user waits to be redirected to the login page.
-//     onRedirecting: () => <div>Loading</div>,
-//     loginOptions
-//   });
-// };
-
-// export default withAuthenticator(App);
 export default App
